@@ -1,0 +1,47 @@
+Programación multicapas: es una arquitectura de software en el que se separa las interacciones con los usuarios de el acceso a la base de datos.
+
+https://es.wikipedia.org/wiki/Programaci%C3%B3n_por_capas
+
+http://www.inf-cr.uclm.es/www/mpolo/asig/0304/0102/arquitecturamulticapayobservadores.PDF
+
+Vista: Todos los archivos que tengan interacción con los usuarios, por ejemplo áginas HTML, Javascript, recursos multimediales.
+
+Modelo: Una clase por cada tabla de la base de datos. un archivo PHP por cada clase. dentro de cada clase un atributo por cada campo de la tabla. método constructor, métodos get y métodos set. El modelo se refiere a las entidades.
+
+Control: Todas las clases con los métodos de acceso a bases de datos y reglas del negocio. 
+
+Para ejecutar un proyecto es necesario instalar un software para servicios web. en nuestro caso es el Apache.
+
+https://es.wikipedia.org/wiki/Servidor_web
+
+Los botones tipo submit lanzan automaticamente la página definida en la propiedad "action" del formulario
+
+los datos que estan almacenados en los objetos del "body", "Inputs" entre otros, se pasan a traves de la URL, por método GET.
+
+
+Back-end: Corresponde a las clases de la capa modelo y la capa control (reglas de negocio).
+Front-end: Corresponde a las clases, recursos y demas archivos de la vista.
+
+
+Convensión: las clases del modelo tendrán el mismo nombre de la base de datos. el archivo PHP de la clase tendrá el mismo nombre de la clase.
+
+Parametros: son variables declaradas dentro de los paréntesis del método. Se comportan como variables locales y sirven para recibir datos.
+
+El constructor es un metodo que permite instanciar la clase (es decir crear el objeto de la clase) e inicializar atributos.
+
+Siempre que se refiere a un atributo de una clase se debe utilizar $this
+
+El método set es para actualizar el valor de un atributo
+
+el método get es para obtener o consultar el valor de un atributo
+
+
+
+
+
+
+
+
+
+
+
