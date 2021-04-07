@@ -5,7 +5,7 @@
         var $nombre;
         
 
-        function _construct( $idCargo, $nombre){
+        function __construct( $idCargo, $nombre){
 
             $this->idCargo = $idCargo;
             $this->nombre = $nombre;
