@@ -5,41 +5,39 @@
  * 
  *Para llamar a un método es: , $nombreObjeto->nombreMetodo(argumentos)
  */
-       class ControlAreas
+       class ControlDetalleRequerimiento
     {
-        var $objAreas;
+        var $objDetalleRequerimiento;
     
-        function __construct($objAreas)
+        function __construct($objDetalleRequerimiento)
         {
-            $this->objAreas = $objAreas;
+            $this->objDetalleRequerimiento = $objDetalleRequerimiento;
         }
     
-        function guardar()
+        function GuardarDetalleRequerimiento()
         {
-            $ida=$this->objAreas->getIdArea();
-            $nom=$this->objAreas->getNombre();
-            $fkEm=$this->objAreas->getFkEmple();
+            $txtreq=$this->objDetalleRequerimiento->getObservacion();
+            $fecha=$this->objDetalleRequerimiento->getFecha();
+            $fke=$this->objDetalleRequerimiento->getFkEmple();
+            $idr=$this->ConsultarUltimoRequerimiento();
 
             $objControlConexion = new ControlConexion();
             $objControlConexion->abrirBd("localhost","root","","mesa_ayuda");
-
-            $comandoSql = "insert into area values('".$ida."','".$nom."','".$fkEm."')";
-
-            //$comandoSql = "insert into clientes values('".$ida."','".$nom."','".$tel."','".$ema."',".$cre.")";
-
+            $comandoSql = "insert into detallereq values(0,'".$fecha."','".$txtreq."',".$idr.",'1','".$fke."',null)";
+            $sentencia = "insert into detallereq values(0,'".$this->objDetalleRequerimiento->getFecha()."','".$this->objDetalleRequerimiento->getObservacion()."',".$this->objDetalleRequerimiento->getFkReq().",'1','".$this->objDetalleRequerimiento->getFkEmple()."',null)";
             $objControlConexion->ejecutarComandoSql($comandoSql);
 
-            $objControlConexion->cerrarBd();
-            return $ida;
+            $objControlConexion->cerrarBd(); 
+            return $sentencia;
         }
 
         function Consultar()
         {
-            $ida=$this->objAreas->getIdArea();
+            $cod=$this->objDetalleRequerimiento->getIdArea();
             $objControlConexion = new ControlConexion();
             $objControlConexion->abrirBd("localhost","root","","bdmesa_ayuda");
 
-            $comandoSql = "select * from area where codigo = '".$ida."'";
+            $comandoSql = "select * from area where codigo = '".$cod."'";
 
             $rs = $objControlConexion->ejecutarSelect($comandoSql);
             $registro = $rs->fetch_array(MYSQLI_BOTH); //Asigna los datos a la variable registro.
@@ -48,42 +46,37 @@
             $fkEm = $registro ["FKEMPLE"];
            
 
-            $this->objAreas->setNombre($nom);
-            $this->objAreas->setFkEmple($fkEm);
+            $this->objDetalleRequerimiento->setNombre($nom);
+            $this->objDetalleRequerimiento->setFkEmple($fkEm);
            
 
             $objControlConexion->cerrarBd();
-            return $this->objAreas;
+            return $this->objDetalleRequerimiento;
         }
-
-        function ConsultarId()
+        function ConsultarUltimoRequerimiento()
         {
-            $ida=$this->objAreas->getIdArea();
             $objControlConexion = new ControlConexion();
             $objControlConexion->abrirBd("localhost","root","","mesa_ayuda");
 
-            $comandoSql = "select * from area where idarea = '".$ida."'";
-
+            $comandoSql = "select max(idreq) as idreq from requerimiento";
             $rs = $objControlConexion->ejecutarSelect($comandoSql);
             $registro = $rs->fetch_array(MYSQLI_BOTH); //Asigna los datos a la variable registro.
-            
-            $ida = $registro ["IDAREA"];
-
+            $idr = $registro ["idreq"];
             $objControlConexion->cerrarBd();
-            return $ida;
+            return $idr;
         }
-
+         
         function Modificar()
         {
-            $ida=$this->objAreas->getIdArea();
-            $nom=$this->objAreas->getNombre();
-            $fkEm=$this->objAreas->getFkEmple();
+            $cod=$this->objDetalleRequerimiento->getIdArea();
+            $nom=$this->objDetalleRequerimiento->getNombre();
+            $fkEm=$this->objDetalleRequerimiento->getFkEmple();
             
 
             $objControlConexion = new ControlConexion();
             $objControlConexion->abrirBd("localhost","root","","bdmesa_ayuda");
 
-            $comandoSql = "update area set nombre = '".$nom."',fkEmple = '".$fkEm."' where codigo = '".$ida."'";
+            $comandoSql = "update area set nombre = '".$nom."',fkEmple = '".$fkEm."' where codigo = '".$cod."'";
 
             
             $objControlConexion->ejecutarComandoSql($comandoSql);
@@ -94,12 +87,12 @@
 
         function Borrar()
         {
-            $ida=$this->objAreas->getIdArea();
+            $cod=$this->objDetalleRequerimiento->getIdArea();
             
             $objControlConexion = new ControlConexion();
             $objControlConexion->abrirBd("localhost","root","","bdmesa_ayuda");
 
-            $comandoSql = "delete from area where codigo= '".$ida."' ";
+            $comandoSql = "delete from area where codigo= '".$cod."' ";
 
             
             $objControlConexion->ejecutarComandoSql($comandoSql);
@@ -107,6 +100,7 @@
             $objControlConexion->cerrarBd();
     
         }
+
     }
 
     

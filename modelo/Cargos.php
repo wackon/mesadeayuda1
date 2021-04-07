@@ -12,21 +12,21 @@
            
         }
 
-        function setIdCargo($idCargo){
-            $this->idCargo = $idCargo;
-        }
-
         function getIdCargo (){
             return $this->idCargo;
         }
 
-
-        function setNombre($nombre){
-            $this->nombre = $nombre;
+        function setIdCargo($idCargo){
+            $this->idCargo = $idCargo;
         }
 
         function getNombre (){
             return $this->nombre;
         }
 
+        function setNombre($nombre){
+            $this->nombre = $nombre;
+        }
+
+    }
 ?>
